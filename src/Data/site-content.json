@@ -1,0 +1,26 @@
+{
+    "siteInfo":{
+        "shopName": "Shop Title",
+        "metadesc": "shopMetaDesc",
+        "lan":"en"
+    },
+    "nav":{
+        "home":"Home",
+        "products":"Products",
+        "about":"About"
+    },
+    "home": {
+        "title": "Wellcome text",
+        "desc": "Site Desc, lorem Ipsum blah blah",
+        "notice": "Notice Text"
+    },
+    "footer": {
+        "about": "About this shop",
+        "contactname1": "contact name",
+        "contactname2": "contact name",
+        
+        "contactnumber1": "0123456789",
+        "contactnumber2": "0123456789"
+        
+    }
+}
