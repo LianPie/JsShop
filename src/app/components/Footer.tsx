@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 
 type FooterProps = {
   siteName: string;
@@ -51,12 +51,13 @@ export default function Footer({ siteName, footer }: FooterProps) {
             </p>
           </div>
 
-          <Image
+          <img
             src="/favicon.ico"
             alt="Shop logo"
             width={100}
             height={100}
             className="shrink-0"
+            loading="eager"
           />
         </div>
 

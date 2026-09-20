@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { link } from "fs";
@@ -24,12 +23,13 @@ export default function Navbar({ siteName, links }: navinfo) {
 
                 {/* Brand */}
                 <div className="flex items-center gap-3">
-                    <Image
+                    <img
                         className="hidden md:block"
                         src="/favicon.ico"
                         alt="Logo"
                         width={32}
                         height={32}
+                        loading="eager"
                     />
 
                     <h1 className="text-lg font-semibold tracking-tight">
