@@ -12,7 +12,8 @@
     "home": {
         "title": "Welcome text",
         "desc": "Site Desc, lorem Ipsum blah blah",
-        "notice": "Notice Text"
+        "notice": "Notice Text",
+        "bestselling": "Best Selling"
     },
     "footer": {
         "about": "About this shop",

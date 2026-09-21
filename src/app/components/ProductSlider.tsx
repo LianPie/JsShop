@@ -10,6 +10,9 @@ import {
 import ProductCard from "./ProductCard";
 import Loader from "./Loading";
 
+type SliderInfo = {
+    Name: string;
+}
 type Product = {
   id: number;
   name: string;
@@ -17,7 +20,7 @@ type Product = {
   image: string;
 };
 
-export default function MostBought() {
+export default function ProductSlider({ Name }: SliderInfo) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,16 +44,17 @@ export default function MostBought() {
       });
   }, []);
 
-  return (
-    <section className="pb-16">
-      <h2 className="mb-6 text-2xl font-semibold">
-        Most Bought
-      </h2>
+  return (<section className="w-full pb-16">
+    <h2 className="mb-6 text-2xl font-semibold">
+      {Name}
+    </h2>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="relative">
+    {loading ? (
+      <Loader />
+    ) : (
+      <div className="relative w-full">
+        {/* Slider viewport */}
+        <div className="w-full overflow-hidden">
           <div
             ref={sliderRef}
             className="flex gap-5 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -62,25 +66,27 @@ export default function MostBought() {
               />
             ))}
           </div>
-
-          {/* Slider arrows */}
-          <button
-            onClick={() => scrollSlider("left")}
-            className="absolute -left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:bg-gray-50"
-            aria-label="Previous products"
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
-          </button>
-
-          <button
-            onClick={() => scrollSlider("right")}
-            className="absolute -right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:bg-gray-50"
-            aria-label="Next products"
-          >
-            <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
-          </button>
         </div>
-      )}
-    </section>
+
+        {/* Left arrow */}
+        <button
+          onClick={() => scrollSlider("left")}
+          className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50"
+          aria-label="Previous products"
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={() => scrollSlider("right")}
+          className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50"
+          aria-label="Next products"
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </div>
+    )}
+  </section>
   );
 }

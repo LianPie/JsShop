@@ -11,7 +11,7 @@ type Product = {
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group w-64 shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <div className="group w-64 shrink-0 overflow-hidden rounded-xl border border-border bg-surface">
       <div className="relative h-48 overflow-hidden bg-gray-100">
         <img
           src={product.image}
