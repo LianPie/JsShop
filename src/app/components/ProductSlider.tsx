@@ -68,7 +68,6 @@ export default function ProductSlider({ Name }: SliderInfo) {
           </div>
         </div>
 
-        {/* Left arrow */}
         <button
           onClick={() => scrollSlider("left")}
           className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50"
@@ -77,7 +76,6 @@ export default function ProductSlider({ Name }: SliderInfo) {
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
 
-        {/* Right arrow */}
         <button
           onClick={() => scrollSlider("right")}
           className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50"

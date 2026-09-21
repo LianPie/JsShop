@@ -12,20 +12,21 @@ export default function Home() {
 
         <div className="relative max-w-3xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            Welcome
+            {content.home.Welcome}
           </p>
 
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            {content.home.title}
+            {content.siteInfo.shopName}
           </h1>
 
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
             {content.home.desc}
           </p>
-
-          <button className="mt-8 rounded-lg bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary-hover">
-            Explore Products
-          </button>
+          <a href="/product">
+            <button className="mt-8 rounded-lg bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary-hover">
+              {content.home.explore}
+            </button>
+          </a>
         </div>
       </section>
 

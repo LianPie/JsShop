@@ -41,14 +41,14 @@ export default function Navbar({ siteName, links }: navinfo) {
                 <div className="hidden items-center gap-8 md:flex">
                     <a
                         className="text-sm font-medium transition-colors hover:text-primary"
-                        href="#"
+                        href="/"
                     >
                         {links.home}
                     </a>
 
                     <a
                         className="text-sm font-medium transition-colors hover:text-primary"
-                        href="#"
+                        href="/product"
                     >
                         {links.products}
                     </a>

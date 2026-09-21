@@ -10,10 +10,15 @@
         "about":"About"
     },
     "home": {
-        "title": "Welcome text",
+        "Welcome": "Welcome text",
         "desc": "Site Desc, lorem Ipsum blah blah",
+        "explore": "Explore Products",
         "notice": "Notice Text",
         "bestselling": "Best Selling"
+    },
+    "products": {
+        "pagetitle": "Products",
+        "explore": "Browse all of our products."
     },
     "footer": {
         "about": "About this shop",
