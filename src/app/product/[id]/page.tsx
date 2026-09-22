@@ -46,12 +46,19 @@ export default function details({ params }: PageProps) {
 
             {/* Content */}
             <div className="grid grid-cols-1 gap-10 p-6 md:grid-cols-2 md:p-8">
-                {/* Image */}
-                <div className="h-96 overflow-hidden rounded-xl bg-accent-soft">
+                <div className="relative h-96 overflow-hidden rounded-xl">
+                    {/* Blurred background */}
+                    <img
+                        src={product?.image}
+                        alt=""
+                        className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl"
+                    />
+
+                    {/* Actual image */}
                     <img
                         src={product?.image}
                         alt={product?.name}
-                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                        className="relative h-full w-full object-contain transition-transform duration-300 hover:scale-105"
                     />
                 </div>
 
@@ -79,7 +86,7 @@ export default function details({ params }: PageProps) {
 
                     {/* Add to cart */}
                     <button
-                        className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-white transition hover:bg-primary-hover"
+                        className="mt-5 md:mt-auto flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-medium text-white transition hover:bg-primary-hover"
                     >
                         <FontAwesomeIcon icon={faCartShopping} />
                         Add to Cart
