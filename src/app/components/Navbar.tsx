@@ -55,7 +55,7 @@ export default function Navbar({ siteName, links }: navinfo) {
 
                     <a
                         className="text-sm font-medium transition-colors hover:text-primary"
-                        href="#"
+                        href="/about"
                     >
                         {links.about}
                     </a>
@@ -90,7 +90,7 @@ export default function Navbar({ siteName, links }: navinfo) {
                         <a href="/product" className="text-sm font-medium">
                             Products
                         </a>
-                        <a href="#" className="text-sm font-medium">
+                        <a href="/about" className="text-sm font-medium">
                             About
                         </a>
                     </div>

@@ -25,6 +25,10 @@
         "price": "Price",
         "addCard": "Add to Cart"
     },
+    "aboutus": {
+        "title": "About Us",
+        "des": "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum"
+    },
     "footer": {
         "about": "About this shop",
         "contactname1": "contact name",
