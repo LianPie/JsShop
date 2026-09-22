@@ -190,6 +190,18 @@ app.get("/api/products", (req, res) => {
   });
 });
 
+app.get("/api/products/details", (req, res) => {
+  const productId = Number(req.query.id);
+  
+  const targetProduct = products.find((product) => product.id === productId);
+
+  if (!targetProduct) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  res.json(targetProduct);
+});
+
 app.get("/api/products/most-bought", (req, res) => {
   res.json(
     [...products]

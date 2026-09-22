@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import ProductCard from "./ProductCard";
-import Loader from "./Loading";
+import Loader from "./Loader";
 
 type Product = {
   id: number;
@@ -43,7 +43,7 @@ export default function ProductsGrid() {
     return <Loader />;
   }
 
-   return (
+  return (
     <div>
       {/* Product grid */}
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -62,7 +62,7 @@ export default function ProductsGrid() {
           disabled={currentPage === 1}
           className="rounded-lg border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-40"
         >
-          
+
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
 
@@ -73,11 +73,10 @@ export default function ProductsGrid() {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`h-10 w-10 rounded-lg text-sm ${
-                currentPage === page
+              className={`h-10 w-10 rounded-lg text-sm ${currentPage === page
                   ? "bg-primary text-white"
                   : "border border-border hover:bg-accent-soft"
-              }`}
+                }`}
             >
               {page}
             </button>
@@ -89,7 +88,7 @@ export default function ProductsGrid() {
           disabled={currentPage === totalPages}
           className="rounded-lg border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-40"
         >
-          
+
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>

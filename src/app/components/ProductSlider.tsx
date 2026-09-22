@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import ProductCard from "./ProductCard";
-import Loader from "./Loading";
+import Loader from "./Loader";
 
 type SliderInfo = {
     Name: string;

@@ -18,7 +18,12 @@
     },
     "products": {
         "pagetitle": "Products",
-        "explore": "Browse all of our products."
+        "explore": "Browse all of our products.",
+        "product-pagetitle": "Product -",
+        "productinfo": "Product details",
+        "title": "Title",
+        "price": "Price",
+        "addCard": "Add to Cart"
     },
     "footer": {
         "about": "About this shop",

@@ -84,10 +84,10 @@ export default function Navbar({ siteName, links }: navinfo) {
             >
                 <div className="mx-auto max-w-7xl border-t border-border px-5 py-4">
                     <div className="flex flex-col gap-4">
-                        <a href="#" className="text-sm font-medium">
+                        <a href="/" className="text-sm font-medium">
                             Home
                         </a>
-                        <a href="#" className="text-sm font-medium">
+                        <a href="/product" className="text-sm font-medium">
                             Products
                         </a>
                         <a href="#" className="text-sm font-medium">
