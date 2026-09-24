@@ -39,12 +39,12 @@ An admin dashboard will allow managing products, users, and orders, as well as t
 
 ### Backend
 
-* Node.js
-* [Backend framework — TBD]
+* Next.js (Route Handlers / API routes)
 
 ### Database
 
-* [Database — TBD]
+* PostgreSQL
+* Prisma (ORM)
 
 ## Project Status
 
