@@ -52,7 +52,7 @@ export default function ProductSlider({ Name }: SliderInfo) {
         <div className="w-full overflow-hidden">
           <div
             ref={sliderRef}
-            className="flex gap-5 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 overflow-x-auto scroll-smooth pb-2 [scrollbar:none] [&::-webkit-scrollbar]:hidden"
           >
             {products.map((product) => (
               <ProductCard
