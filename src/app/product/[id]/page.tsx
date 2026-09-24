@@ -1,21 +1,15 @@
 "use client";
 
 import content from "@/data/site-content.json";
-import Loader from "../../components/Loader";
+import Loader from "../../../components/Loader";
 import { useEffect, useState, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
+import type { Product } from "@/types/product";
 
 interface PageProps {
     params: Promise<{ id: string }>;
 }
-type Product = {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-};
 
 export default function details({ params }: PageProps) {
 
@@ -25,7 +19,7 @@ export default function details({ params }: PageProps) {
     const { id } = use(params);
     const productId = Number(id);
     useEffect(() => {
-        fetch(`http://localhost:3001/api/products/details?id=${productId}`)
+        fetch(`/api/products/${productId}`)
             .then((res) => res.json())
             .then((data) => {
                 setProduct(data);

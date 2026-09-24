@@ -1,4 +1,4 @@
-import ProductSlider from "./components/ProductSlider";
+import ProductSlider from "../components/ProductSlider";
 import content from "@/data/site-content.json";
 
 

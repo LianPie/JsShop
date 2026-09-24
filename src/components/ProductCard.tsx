@@ -1,13 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-};
+import type { Product } from "@/types/product";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (

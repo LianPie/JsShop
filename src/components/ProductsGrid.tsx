@@ -9,13 +9,7 @@ import {
 
 import ProductCard from "./ProductCard";
 import Loader from "./Loader";
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-};
+import type { Product } from "@/types/product";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -28,7 +22,7 @@ export default function ProductsGrid() {
   useEffect(() => {
     setLoading(true);
 
-    fetch(`http://localhost:3001/api/products?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`)
+    fetch(`/api/products?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);

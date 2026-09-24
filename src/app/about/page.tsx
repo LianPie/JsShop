@@ -18,11 +18,19 @@ export default function details() {
         {/* Content */}
         <div className="grid grid-cols-1 gap-10 p-6 md:grid-cols-2 md:p-10">
             {/* Image */}
-            <div className="aspect-video overflow-hidden rounded-xl bg-accent-soft">
+            <div className="relative h-96 overflow-hidden rounded-xl">
+                {/* Blurred background */}
+                <img
+                    src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+                    alt=""
+                    className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl"
+                />
+
+                {/* Actual image */}
                 <img
                     src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
                     alt={content.aboutus.title}
-                    className="h-full min-h-80 w-full object-contain"
+                    className="relative h-full w-full object-contain"
                 />
             </div>
 

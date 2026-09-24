@@ -1,4 +1,4 @@
-import ProductsGrid from "../components/ProductsGrid";
+import ProductsGrid from "../../components/ProductsGrid";
 import content from "@/data/site-content.json";
 
 export default function ProductsPage() {

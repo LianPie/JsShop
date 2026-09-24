@@ -9,16 +9,11 @@ import {
 
 import ProductCard from "./ProductCard";
 import Loader from "./Loader";
+import type { Product } from "@/types/product";
 
 type SliderInfo = {
     Name: string;
 }
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-};
 
 export default function ProductSlider({ Name }: SliderInfo) {
   const [products, setProducts] = useState<Product[]>([]);
@@ -36,7 +31,7 @@ export default function ProductSlider({ Name }: SliderInfo) {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/products/most-bought")
+    fetch("/api/products/most-bought")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
