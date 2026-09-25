@@ -11,7 +11,7 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-export default function details({ params }: PageProps) {
+export default function Details({ params }: PageProps) {
 
     const [product, setProduct] = useState<Product>();
     const [loading, setLoading] = useState(true);
