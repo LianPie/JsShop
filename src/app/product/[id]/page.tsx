@@ -30,7 +30,7 @@ export default function Details({ params }: PageProps) {
     if (loading) {
         return <Loader />;
     } return (
-        <div className="w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm mt-2">
+        <div className="w-full mb-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm mt-2">
             {/* Title */}
             <div className="border-b border-border bg-accent-soft px-6 py-5">
                 <h1 className="text-3xl font-semibold tracking-tight text-foreground">

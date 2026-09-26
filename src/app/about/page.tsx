@@ -3,7 +3,7 @@ import content from "@/data/site-content.json";
 
 
 export default function details() {
-    return (<div className="mt-4 w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+    return (<div className="mt-4 w-full mb-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
         {/* Title */}
         <div className="border-b border-border bg-accent-soft px-6 py-6 md:px-8">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">

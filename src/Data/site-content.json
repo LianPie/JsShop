@@ -33,6 +33,13 @@
         "price": "Price",
         "addCard": "Add to Cart"
     },
+    "login": {
+        "title": "Log in",
+        "subtitle": "Welcome back! Log in with your phone number.",
+        "phone": "Phone number",
+        "password": "Password",
+        "submit": "Log in"
+    },
     "aboutus": {
         "title": "About Us",
         "des": "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum"

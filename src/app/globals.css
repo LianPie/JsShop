@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./stars.css";
 
 :root {
   --background: #faf7f2;
