@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import content from "@/data/site-content.json";
 
 const inter = Inter({
@@ -26,19 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
     >
       <body className={`${inter.className}  flex min-h-screen flex-col`}>
-        <Navbar
-          siteName={content.siteInfo.shopName}
-          links={content.nav} />
-
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4">
-          {children}
-        </main>
-
-        <Footer
-          siteName={content.siteInfo.shopName}
-          footer={content.footer}
-        />
-
+        {children}
       </body>
     </html>
   );

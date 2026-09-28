@@ -1,7 +1,7 @@
 "use client";
 
 import content from "@/data/site-content.json";
-import Loader from "../../../components/Loader";
+import Loader from "@/components/Loader";
 import { useEffect, useState, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
