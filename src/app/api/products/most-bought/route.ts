@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { products } from "@/data/products";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
-  const mostBought = [...products]
-    .sort((a, b) => b.boughtCount - a.boughtCount)
-    .slice(0, 8);
+  const mostBought = 
+    await prisma.product.findMany({ orderBy: { boughtCount: "desc" } , take: 8 });
+
+
 
   return NextResponse.json(mostBought);
 }

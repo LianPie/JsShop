@@ -1,18 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
-import { products } from "@/data/products";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || 12;
 
-  const startIndex = (page - 1) * limit;
-  const paginatedProducts = products.slice(startIndex, startIndex + limit);
+
+
+  const [products, total] = await Promise.all([
+
+    prisma.product.findMany({ skip: (page - 1) * limit, take: limit, orderBy: { id: "asc" } }),
+
+    prisma.product.count()
+   ]);
 
   return NextResponse.json({
-    products: paginatedProducts,
-    totalProducts: products.length,
-    totalPages: Math.ceil(products.length / limit),
+
+    products: products,
+    totalProducts: total,
+    totalPages: Math.ceil(total / limit),
     currentPage: page,
   });
 }

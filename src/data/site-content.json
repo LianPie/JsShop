@@ -38,7 +38,28 @@
         "subtitle": "Welcome back! Log in with your phone number.",
         "phone": "Phone number",
         "password": "Password",
-        "submit": "Log in"
+        "submit": "Log in",
+        "switchTitle": "Already have an account?",
+        "switchText": "Log in to see your orders and account info.",
+        "switchButton": "Log in"
+    },
+    "signup": {
+        "title": "Sign up",
+        "subtitle": "Create an account with your phone number.",
+        "name": "Full name",
+        "phone": "Phone number",
+        "password": "Password",
+        "repeatPassword": "Repeat password",
+        "rules": {
+            "length": "At least 8 characters",
+            "uppercase": "One uppercase letter",
+            "lowercase": "One lowercase letter"
+        },
+        "mismatch": "Passwords don't match",
+        "submit": "Create account",
+        "switchTitle": "New here?",
+        "switchText": "Create an account to place orders and track them.",
+        "switchButton": "Sign up"
     },
     "aboutus": {
         "title": "About Us",
