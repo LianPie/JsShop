@@ -19,19 +19,20 @@ type navinfo = {
             logIn: string;
             profile: string;
             orders: string;
+            logOut: string;
         };
         cart: string;
     };
+    isLoggedIn: boolean;
 }
 
-export default function Navbar({ siteName, links }: navinfo) {
+export default function Navbar({ siteName, links, isLoggedIn }: navinfo) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [openPanel, setOpenPanel] = useState<"Cart" | "User" | null>(null);
 
-    // TODO: replace with the real session check once login exists
-    const isLoggedIn = false;
+    
 
-    const togglePanel = ( panel: "Cart" | "User") => {
+    const togglePanel = (panel: "Cart" | "User") => {
         if (openPanel === panel) setOpenPanel(null);
         else {
             setOpenPanel(panel);

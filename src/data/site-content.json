@@ -12,7 +12,8 @@
             "noAuth":"Log in to access your account info",
             "logIn":"Log in",
             "profile":"Profile",
-            "orders":"Orders"
+            "orders":"Orders",
+            "logOut":"Log out"
         },
         "cart": "Cart"
         
@@ -39,6 +40,7 @@
         "phone": "Phone number",
         "password": "Password",
         "submit": "Log in",
+        "networkError": "Something went wrong. Please try again.",
         "switchTitle": "Already have an account?",
         "switchText": "Log in to see your orders and account info.",
         "switchButton": "Log in"
@@ -57,6 +59,7 @@
         },
         "mismatch": "Passwords don't match",
         "submit": "Create account",
+        "networkError": "Something went wrong. Please try again.",
         "switchTitle": "New here?",
         "switchText": "Create an account to place orders and track them.",
         "switchButton": "Sign up"

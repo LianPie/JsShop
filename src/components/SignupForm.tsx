@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AuthField, AuthSubmit } from "./AuthFields";
+import { passwordRules, isValidPassword, PasswordRule, PASSWORD_MAX_LENGTH, NAME_MAX_LENGTH } from "@/lib/validation";
 
 type SignupFormInfo = {
     text: {
@@ -16,6 +17,7 @@ type SignupFormInfo = {
         };
         mismatch: string;
         submit: string;
+        networkError: string;
     };
 }
 
@@ -24,20 +26,24 @@ export default function SignupForm({ text }: SignupFormInfo) {
     const [repeat, setRepeat] = useState("");
     // Becomes true after the first submit attempt, so errors show even on untouched fields
     const [triedSubmit, setTriedSubmit] = useState(false);
+    // True while waiting for the server; disables the button
+    const [loading, setLoading] = useState(false);
+    // Message from the server (e.g. "already registered"), shown above the button
+    const [error, setError] = useState<string | null>(null);
 
     // The password rules, checked on every keystroke.
     // NOTE: the signup API must check these again; browser checks can be skipped.
-    const rules = [
-        { label: text.rules.length, met: password.length >= 8 },
-        { label: text.rules.uppercase, met: /[A-Z]/.test(password) },
-        { label: text.rules.lowercase, met: /[a-z]/.test(password) },
-    ];
-    const passwordValid = rules.every((rule) => rule.met);
+    const rules = (Object.keys(passwordRules) as PasswordRule[]).map((name) => ({
+        label: text.rules[name],
+        met: passwordRules[name](password),
+    }));
+
+    const passwordValid = isValidPassword(password);
 
     // Only complain about the repeat field once something has been typed in it
     const mismatch = (repeat.length > 0 || triedSubmit) && repeat !== password;
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         // Stop the browser from submitting the form itself
         event.preventDefault();
 
@@ -46,12 +52,41 @@ export default function SignupForm({ text }: SignupFormInfo) {
             return;
         }
 
-        // TODO: send name + phone + password to the signup API once it exists
+        // Name and phone aren't in state, so read them from the form
+        const form = new FormData(event.currentTarget);
+        const name = form.get("signup-name");
+        const phone = form.get("signup-phone");
+
+        setError(null);
+        setLoading(true);
+
+        try {
+            const res = await fetch("/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, phone, password }),
+            });
+
+            if (!res.ok) {
+                // The API sends { message: "..." } for every error
+                const data = await res.json().catch(() => null);
+                setError(data?.message ?? text.networkError);
+                return;
+            }
+
+            // Account created and logged in: full reload so the navbar sees the new cookie
+            window.location.href = "/";
+        } catch {
+            // fetch itself failed: server down, no internet, etc.
+            setError(text.networkError);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <AuthField id="signup-name" label={text.name} autoComplete="name" />
+            <AuthField id="signup-name" label={text.name} autoComplete="name" maxLength={NAME_MAX_LENGTH} />
             <AuthField id="signup-phone" label={text.phone} type="tel" autoComplete="tel" digitsOnly />
 
             <AuthField
@@ -59,6 +94,7 @@ export default function SignupForm({ text }: SignupFormInfo) {
                 label={text.password}
                 type="password"
                 autoComplete="new-password"
+                maxLength={PASSWORD_MAX_LENGTH}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 invalid={triedSubmit && !passwordValid}
@@ -88,6 +124,7 @@ export default function SignupForm({ text }: SignupFormInfo) {
                 label={text.repeatPassword}
                 type="password"
                 autoComplete="new-password"
+                maxLength={PASSWORD_MAX_LENGTH}
                 value={repeat}
                 onChange={(event) => setRepeat(event.target.value)}
                 invalid={mismatch}
@@ -100,7 +137,13 @@ export default function SignupForm({ text }: SignupFormInfo) {
                 )}
             </AuthField>
 
-            <AuthSubmit>{text.submit}</AuthSubmit>
+            {error && (
+                <p role="alert" className="rounded-lg bg-red-500/15 px-4 py-3 text-sm text-red-100 md:bg-red-50 md:text-red-700">
+                    {error}
+                </p>
+            )}
+
+            <AuthSubmit disabled={loading}>{text.submit}</AuthSubmit>
         </form>
     );
 }

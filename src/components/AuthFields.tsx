@@ -13,6 +13,7 @@ type AuthFieldInfo = {
     describedBy?: string;
     // Strips anything that isn't 0-9 as you type or paste
     digitsOnly?: boolean;
+    maxLength?: number;
     children?: ReactNode;
 }
 
@@ -24,7 +25,7 @@ const stripNonDigits = (event: FormEvent<HTMLInputElement>) => {
 
 // Label + input used by the login and signup forms.
 // Anything passed as children (hints, errors) is shown under the input.
-export function AuthField({ id, label, type = "text", autoComplete, inputMode, value, onChange, invalid, describedBy, digitsOnly, children }: AuthFieldInfo) {
+export function AuthField({ id, label, type = "text", autoComplete, inputMode, value, onChange, invalid, describedBy, digitsOnly, maxLength, children }: AuthFieldInfo) {
     return (
         <div className="flex flex-col gap-2">
             <label htmlFor={id} className="text-sm font-medium">
@@ -38,6 +39,7 @@ export function AuthField({ id, label, type = "text", autoComplete, inputMode, v
                 pattern={digitsOnly ? "[0-9]*" : undefined}
                 onInput={digitsOnly ? stripNonDigits : undefined}
                 autoComplete={autoComplete}
+                maxLength={maxLength}
                 value={value}
                 onChange={onChange}
                 aria-invalid={invalid || undefined}
@@ -51,11 +53,13 @@ export function AuthField({ id, label, type = "text", autoComplete, inputMode, v
 }
 
 // Accent on the phone's starfield background, primary on desktop's white card
-export function AuthSubmit({ children }: { children: ReactNode }) {
+// disabled: while a request is in flight, so it can't be sent twice
+export function AuthSubmit({ children, disabled = false }: { children: ReactNode; disabled?: boolean }) {
     return (
         <button
             type="submit"
-            className="mt-2 rounded-lg bg-accent px-6 py-3 font-medium text-nav-fore transition hover:brightness-95 md:bg-primary md:text-white md:hover:bg-primary-hover md:hover:brightness-100"
+            disabled={disabled}
+            className="mt-2 rounded-lg bg-accent px-6 py-3 font-medium text-nav-fore transition hover:brightness-95 disabled:cursor-wait disabled:opacity-60 md:bg-primary md:text-white md:hover:bg-primary-hover md:hover:brightness-100"
         >
             {children}
         </button>
