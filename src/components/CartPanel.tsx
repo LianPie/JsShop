@@ -120,6 +120,14 @@ export default function CartPanel({ title }: CartPanelInfo) {
                     ${total.toFixed(2)}
                 </span>
             </div>
+
+            {/* Opens the order page, where it can be checked and submitted */}
+            <a
+                href="/order"
+                className="mt-3 block rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-primary-hover"
+            >
+                {content.cart.submitOrder}
+            </a>
         </div>
     );
 }

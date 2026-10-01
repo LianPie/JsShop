@@ -41,7 +41,35 @@
         "total": "Total",
         "increase": "Add one",
         "decrease": "Remove one",
+        "submitOrder": "Submit order",
         "networkError": "Something went wrong. Please try again."
+    },
+    "order": {
+        "title": "Your order",
+        "draftNote": "This order hasn't been submitted yet. Check the items below, then submit it.",
+        "submit": "Submit order",
+        "emptyTitle": "Nothing to order",
+        "emptyText": "Your cart is empty. Add some products first.",
+        "browse": "Browse products",
+        "error": "Something went wrong. Please try again."
+    },
+    "orders": {
+        "title": "Orders",
+        "subtitle": "All the orders you've placed.",
+        "orderNumber": "Order #",
+        "date": "Date",
+        "items": "items",
+        "total": "Total",
+        "empty": "You haven't placed any orders yet",
+        "browse": "Browse products",
+        "back": "Back to orders",
+        "status": {
+            "notSubmitted": "Not submitted yet",
+            "stockChecking": "Stock checking",
+            "processing": "Processing",
+            "delivered": "Delivered",
+            "canceled": "Canceled"
+        }
     },
     "login": {
         "title": "Log in",

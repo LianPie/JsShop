@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readCart, writeCart } from "@/lib/cart";
+import { getCartItems, readCart, writeCart } from "@/lib/cart";
 import { prisma } from "@/lib/prisma";
 
 
@@ -124,18 +124,7 @@ export async function PATCH(request: Request) {
 
 
 export async function GET() {
-
-    const cart = await readCart();
-    const ids = cart.products.map(item => item.id)
-
-    const rows = await prisma.product.findMany({ where: { id: { in: ids } } });
-    const byId = new Map(rows.map((p) => [p.id, p]));
-
-    const items = cart.products.flatMap((item) => {
-        const product = byId.get(item.id);
-        if (!product) return [];               // product was deleted: skip it
-        return [{ ...product, quantity: item.quantity }];
-    });
+    const items = await getCartItems();
 
     return NextResponse.json({ products: items });
 }
