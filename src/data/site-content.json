@@ -34,6 +34,15 @@
         "price": "Price",
         "addCard": "Add to Cart"
     },
+    "cart": {
+        "addToCart": "Add to Cart",
+        "remove": "Remove",
+        "empty": "Your cart is empty",
+        "total": "Total",
+        "increase": "Add one",
+        "decrease": "Remove one",
+        "networkError": "Something went wrong. Please try again."
+    },
     "login": {
         "title": "Log in",
         "subtitle": "Welcome back! Log in with your phone number.",

@@ -1,12 +1,21 @@
+"use client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faRoad } from "@fortawesome/free-solid-svg-icons";
 import type { Product } from "@/types/product";
+import { useCart } from "./CartProvider";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
+  const handleAdd = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    await addToCart(product.id);
+  };
+
   return (
+
     <div className="group w-64 shrink-0 overflow-hidden rounded-xl border border-border bg-surface sm: mx-auto">
       <a href={`/product/${product.id}`}>
-    
+
         <div className="relative h-48 overflow-hidden bg-gray-100">
           <img
             src={product.image}
@@ -34,6 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <button
               className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-900 text-white transition hover:bg-gray-700"
               aria-label={`Add ${product.name} to cart`}
+              onClick={handleAdd}
             >
               <FontAwesomeIcon
                 icon={faCartShopping}
