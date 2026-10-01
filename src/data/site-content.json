@@ -44,6 +44,12 @@
         "submitOrder": "Submit order",
         "networkError": "Something went wrong. Please try again."
     },
+    "notFound": {
+        "title": "Page not found",
+        "text": "The page you're looking for doesn't exist or isn't available to you.",
+        "home": "Back to home",
+        "browse": "Browse products"
+    },
     "order": {
         "title": "Your order",
         "draftNote": "This order hasn't been submitted yet. Check the items below, then submit it.",

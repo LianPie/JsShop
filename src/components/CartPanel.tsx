@@ -30,7 +30,7 @@ export default function CartPanel({ title }: CartPanelInfo) {
                 <div className="flex flex-col items-center gap-3 py-8 text-center">
                     <FontAwesomeIcon
                         icon={faBasketShopping}
-                        className="h-12 w-12 text-muted/50"
+                        className="h-12! w-12! text-muted/50"
                     />
                     <p className="text-sm text-muted">
                         {content.cart.empty}
