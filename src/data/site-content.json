@@ -59,6 +59,17 @@
         "browse": "Browse products",
         "error": "Something went wrong. Please try again."
     },
+    "profile": {
+        "title": "Profile",
+        "subtitle": "Your account details.",
+        "phone": "Phone number",
+        "memberSince": "Member since",
+        "orders": "Orders placed",
+        "viewOrders": "View my orders",
+        "addresses": "Saved addresses",
+        "noAddresses": "No saved addresses yet",
+        "zipcode": "Zip code"
+    },
     "orders": {
         "title": "Orders",
         "subtitle": "All the orders you've placed.",
