@@ -5,6 +5,7 @@ import { faUser, faPhone, faCalendarDays, faReceipt, faLocationDot } from "@fort
 import content from "@/data/site-content.json";
 import { getCurrentUser } from "@/lib/session";
 import { getProfile } from "@/lib/profile";
+import AddressListItem from "@/components/AddressListItem";
 
 export const metadata: Metadata = {
     title: `${content.profile.title} | ${content.siteInfo.shopName}`,
@@ -26,6 +27,7 @@ export default async function ProfilePage() {
         { icon: faCalendarDays, label: content.profile.memberSince, value: dateFormat.format(profile.dateCreated) },
         { icon: faReceipt, label: content.profile.orders, value: String(profile._count.orders) },
     ];
+
 
     return (
         <div className="mt-6 mb-10 w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
@@ -74,15 +76,7 @@ export default async function ProfilePage() {
                     ) : (
                         <ul className="mt-3 flex flex-col gap-3">
                             {profile.address.map((address) => (
-                                <li key={address.id} className="flex items-start gap-3 rounded-xl border border-border p-4">
-                                    <FontAwesomeIcon icon={faLocationDot} className="mt-1 text-accent" />
-                                    <div>
-                                        <p className="font-medium">{address.address}</p>
-                                        <p className="text-sm text-muted">
-                                            {content.profile.zipcode}: {address.zipcode}
-                                        </p>
-                                    </div>
-                                </li>
+                                <AddressListItem key={address.id} address={address} />
                             ))}
                         </ul>
                     )}

@@ -41,7 +41,8 @@ model Address {
   zipcode String
   address String
 
-  user User @relation(fields: [userid], references: [id])
+  user    User  @relation(fields: [userid], references: [id])
+  order   Order[]
 }
 
 model Product {
@@ -58,11 +59,13 @@ model Product {
 model Order {
   id            Int      @id @default(autoincrement())
   userid        Int
+  addressid     Int 
   status        Int      @default(0)
   dateSubmitted DateTime @default(now())
 
-  user  User        @relation(fields: [userid], references: [id])
-  items OrderItem[]
+  user    User        @relation(fields: [userid], references: [id])
+  Address Address     @relation(fields: [addressid], references: [id])
+  items   OrderItem[]
 }
 
 model OrderItem {

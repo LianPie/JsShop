@@ -11,6 +11,6 @@ export async function getUserOrders(userId: number) {
 export async function getUserOrder(orderid: number) {
     return prisma.order.findUnique({
         where: { id: orderid },
-        include: { items: { include: { product: true } } },
+        include: {Address: true, items: { include: { product: true } } },
     });
 }

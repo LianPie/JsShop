@@ -4,11 +4,18 @@ import { getCurrentUser } from "@/lib/session";
 import { getCartItems, writeCart } from "@/lib/cart";
 
 // POST /api/orders: turns the cart into a real order for the logged-in user
-export async function POST() {
+export async function POST(request: Request) {
     // Orders belong to a user, so this one needs a login (the cart itself doesn't)
     const user = await getCurrentUser();
     if (!user) {
         return NextResponse.json({ message: "Please log in to submit an order" }, { status: 401 });
+    }
+
+    // Now it ONLY expects an ID, completely unaware of address creation logic
+    const { addressId } = await request.json();
+
+    if (!addressId) {
+        return NextResponse.json({ message: "Shipping address is required" }, { status: 400 });
     }
 
     // Names and prices come from the database, never from the cookie
@@ -22,6 +29,7 @@ export async function POST() {
     const order = await prisma.order.create({
         data: {
             userid: user.id,
+            addressid: parseInt(addressId, 10),
             items: {
                 create: items.map((item) => ({
                     productid: item.id,

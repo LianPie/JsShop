@@ -46,6 +46,19 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
             </div>
 
             <div className="flex flex-col gap-6 p-6 md:p-8">
+                {/* Shipping Address Section */}
+                {order.Address && (
+                    <div className="rounded-xl border border-border bg-background p-5">
+                        <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted">
+                            Shipping Address
+                        </h2>
+                        <div className="text-sm">
+                            <p className="font-medium">{order.Address.address}</p>
+                            <p className="mt-1 text-muted">Zipcode: {order.Address.zipcode}</p>
+                        </div>
+                    </div>
+                )}
+
                 <OrderSummary lines={lines} />
 
                 <a href="/orders" className="text-sm font-medium text-primary hover:underline">
