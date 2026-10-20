@@ -1,22 +1,21 @@
 {
-    "siteInfo":{
+    "siteInfo": {
         "shopName": "Shop Title",
         "metadesc": "shopMetaDesc",
-        "lan":"en"
+        "lan": "en"
     },
-    "nav":{
-        "home":"Home",
-        "products":"Products",
-        "about":"About",
-        "userPop":{
-            "noAuth":"Log in to access your account info",
-            "logIn":"Log in",
-            "profile":"Profile",
-            "orders":"Orders",
-            "logOut":"Log out"
+    "nav": {
+        "home": "Home",
+        "products": "Products",
+        "about": "About",
+        "userPop": {
+            "noAuth": "Log in to access your account info",
+            "logIn": "Log in",
+            "profile": "Profile",
+            "orders": "Orders",
+            "logOut": "Log out"
         },
         "cart": "Cart"
-        
     },
     "home": {
         "Welcome": "Welcome text",
@@ -126,9 +125,34 @@
         "about": "About this shop",
         "contactname1": "contact name",
         "contactname2": "contact name",
-        
         "contactnumber1": "0123456789",
         "contactnumber2": "0123456789"
-        
-    }
+    },
+    "adminNav": [
+        {
+            "label": "Dashboard",
+            "href": "/admin",
+            "icon": "home"
+        },
+        {
+            "label": "Products",
+            "href": "/admin/products",
+            "icon": "box"
+        },
+        {
+            "label": "Orders",
+            "href": "/admin/orders",
+            "icon": "shopping-cart"
+        },
+        {
+            "label": "Customers",
+            "href": "/admin/customers",
+            "icon": "users"
+        },
+        {
+            "label": "Settings",
+            "href": "/admin/settings",
+            "icon": "settings"
+        }
+    ]
 }
