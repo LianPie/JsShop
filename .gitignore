@@ -56,3 +56,4 @@ src/app/favicon.ico
 /src/generated/prisma
 skills-lock.json
 run-sql.ts
+public/uploads/
