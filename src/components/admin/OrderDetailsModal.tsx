@@ -339,10 +339,12 @@ function InfoRow({
   icon,
   label,
   value,
+  badge,
 }: {
   icon: typeof faUser;
   label: string;
   value: string;
+  badge?: string;
 }) {
   return (
     <div className="flex items-start gap-3">
@@ -351,7 +353,14 @@ function InfoRow({
       </div>
       <div className="min-w-0">
         <p className="text-xs text-gray-500">{label}</p>
-        <p className="break-words font-medium text-gray-800">{value}</p>
+        <p className="break-words font-medium text-gray-800">
+          {value}
+          {badge && (
+            <span className="ml-2 rounded-full bg-gray-200 px-2 py-0.5 text-xs font-normal text-gray-600">
+              {badge}
+            </span>
+          )}
+        </p>
       </div>
     </div>
   );

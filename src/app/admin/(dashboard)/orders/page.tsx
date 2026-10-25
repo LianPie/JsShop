@@ -39,6 +39,7 @@ interface OrderRow {
   dateSubmitted: string;
   userName: string;
   phoneNumber: string;
+  customerDeleted: boolean;
 }
 
 interface PaginatedResponse {
@@ -194,8 +195,13 @@ export default function AdminOrdersPage() {
                           {order.userName.charAt(0).toUpperCase()}
                         </div>
                         <span className="font-medium text-gray-800">
-                          {order.userName}
+                          {order.userName || "Unknown"}
                         </span>
+                        {order.customerDeleted && (
+                          <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                            Account deleted
+                          </span>
+                        )}
                       </div>
                     </td>
 

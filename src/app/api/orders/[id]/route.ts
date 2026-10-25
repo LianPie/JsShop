@@ -124,11 +124,12 @@ export async function GET(
     return NextResponse.json({
       id: order.id,
       status: order.status,
-      dateSubmitted: order.dateSubmitted,
-      userName: order.user.userName,
-      phoneNumber: order.user.phoneNumber,
-      address: order.Address.address,
-      zipcode: order.Address.zipcode,
+      dateSubmitted: order.dateSubmitted, 
+      userName: order.user?.userName ?? "Deleted",
+      phoneNumber: order.user?.phoneNumber ?? "Deleted",
+      customerDeleted: order.user === null,
+      address: order.Address?.address ?? "Deleted",
+      zipcode: order.Address?.zipcode ?? "",
       items: order.items.map((i) => ({
         id: i.id,
         productId: i.product.id,
