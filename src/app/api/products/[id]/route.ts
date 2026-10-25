@@ -25,17 +25,16 @@ export async function GET(
   return NextResponse.json(product);
 }
 
-
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> } // Next 15+; use { id: string } directly on Next 14
 ) {
   const user = await getCurrentUser("admin");
   if (!user) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params; // on Next 14: const { id } = params;
   const productId = parseInt(id, 10);
 
   if (isNaN(productId)) {
@@ -43,97 +42,78 @@ export async function PATCH(
   }
 
   try {
-    // 1. Verify the product exists
     const existingProduct = await prisma.product.findUnique({
       where: { id: productId },
     });
 
     if (!existingProduct) {
-      return NextResponse.json(
-        { message: "Product not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: "Product not found" }, { status: 404 });
     }
 
-    // 2. Parse incoming FormData
     const formData = await request.formData();
-    const name = formData.get("name") as string | null;
-    const priceStr = formData.get("price") as string | null;
-    const file = formData.get("image") as File | null;
+    const name = formData.get("name");
+    const priceStr = formData.get("price");
+    const file = formData.get("image");
 
-    // 3. Build the update payload dynamically
-    const updateData: {
-      name?: string;
-      price?: number;
-      image?: string;
-    } = {};
+    const updateData: { name?: string; price?: number; image?: string } = {};
 
-    if (name) {
-      updateData.name = name;
+    if (typeof name === "string" && name.trim()) {
+      updateData.name = name.trim();
     }
 
-    if (priceStr) {
+    if (typeof priceStr === "string" && priceStr.trim()) {
       const price = parseFloat(priceStr);
       if (isNaN(price)) {
-        return NextResponse.json(
-          { message: "Invalid price format" },
-          { status: 400 }
-        );
+        return NextResponse.json({ message: "Invalid price format" }, { status: 400 });
       }
       updateData.price = price;
     }
 
-    // 4. Handle replacing the image file
-    if (file && file.size > 0) {
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    // Upload works whether or not a previous image exists
+    let newFilename: string | null = null;
+    if (file instanceof File && file.size > 0) {
+      const buffer = Buffer.from(await file.arrayBuffer());
       const ext = path.extname(file.name) || ".jpg";
-      const filename = `${uniqueSuffix}${ext}`;
+      newFilename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
 
-      const uploadDir = path.join(process.cwd(), "public/uploads");
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
       await mkdir(uploadDir, { recursive: true });
+      await writeFile(path.join(uploadDir, newFilename), buffer);
 
-      const filepath = path.join(uploadDir, filename);
-      await writeFile(filepath, buffer);
-
-      updateData.image = `/uploads/${filename}`;
-
-      // Optional: Delete the old local file if one previously existed
-      if (existingProduct.image?.startsWith("/uploads/")) {
-        const oldFilePath = path.join(
-          process.cwd(),
-          "public",
-          existingProduct.image
-        );
-        unlink(oldFilePath).catch(() => {
-          // Silent catch: avoids crashing if the file was already deleted manually
-        });
-      }
+      updateData.image = `/uploads/${newFilename}`;
     }
 
-    // 5. Ensure at least one field is provided
     if (Object.keys(updateData).length === 0) {
-      return NextResponse.json(
-        { message: "No fields provided to update" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "No fields provided to update" }, { status: 400 });
     }
 
-    // 6. Update database
     const updatedProduct = await prisma.product.update({
       where: { id: productId },
       data: updateData,
     });
 
+    // Clean up the old file only after the DB update succeeded
+    const oldImage = existingProduct.image;
+    if (newFilename && oldImage && oldImage.startsWith("/uploads/")) {
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      const oldFilePath = path.join(process.cwd(), "public", oldImage);
+
+      // Guard against path traversal, then ignore a missing file
+      if (oldFilePath.startsWith(uploadDir + path.sep)) {
+        try {
+          await unlink(oldFilePath);
+        } catch (err: any) {
+          if (err?.code !== "ENOENT") {
+            console.warn("Could not delete old image:", err);
+          }
+        }
+      }
+    }
+
     return NextResponse.json(updatedProduct, { status: 200 });
   } catch (error) {
     console.error("Error updating product:", error);
-    return NextResponse.json(
-      { message: "Failed to update product" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Failed to update product" }, { status: 500 });
   }
 }
 

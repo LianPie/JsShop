@@ -46,3 +46,54 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ id: order.id }, { status: 201 });
 }
+
+
+export async function GET(request: Request) {
+  const user = await getCurrentUser("admin");
+  if (!user) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(request.url);
+  const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+  const limit = Math.min(
+    100,
+    Math.max(1, parseInt(searchParams.get("limit") ?? "12", 10) || 12)
+  );
+
+  try {
+    const [orders, totalOrders] = await Promise.all([
+      prisma.order.findMany({
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: { dateSubmitted: "desc" },
+        select: {
+          id: true,
+          status: true,
+          dateSubmitted: true,
+          user: { select: { userName: true, phoneNumber: true } },
+        },
+      }),
+      prisma.order.count(),
+    ]);
+
+    return NextResponse.json({
+      orders: orders.map((o) => ({
+        id: o.id,
+        status: o.status,
+        dateSubmitted: o.dateSubmitted,
+        userName: o.user.userName,
+        phoneNumber: o.user.phoneNumber,
+      })),
+      totalOrders,
+      totalPages: Math.max(1, Math.ceil(totalOrders / limit)),
+      currentPage: page,
+    });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return NextResponse.json(
+      { message: "Failed to fetch orders" },
+      { status: 500 }
+    );
+  }
+}

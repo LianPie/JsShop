@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import ProductModal, { Product } from "@/components/admin/ProductModal";
+import DeleteConfirmModal from "@/components/admin/DeleteConfirmModal";
 
 interface PaginatedResponse {
   products: Product[];
@@ -16,6 +17,9 @@ export default function AdminProductsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,19 +59,35 @@ export default function AdminProductsPage() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this product?")) return;
+  const handleOpenDelete = (product: Product) => {
+    setDeleteError(null);
+    setProductToDelete(product);
+  };
+
+  const handleCloseDelete = () => {
+    if (deleting) return;
+    setProductToDelete(null);
+    setDeleteError(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!productToDelete) return;
+
+    setDeleting(true);
+    setDeleteError(null);
 
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`/api/products/${productToDelete.id}`, {
         method: "DELETE",
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        alert(data.message || "Failed to delete product");
+        setDeleteError(data.message || "Failed to delete product");
         return;
       }
+
+      setProductToDelete(null);
 
       // If deleting the last item on the current page, step back one page
       if (products.length === 1 && currentPage > 1) {
@@ -76,7 +96,9 @@ export default function AdminProductsPage() {
         fetchProducts(currentPage);
       }
     } catch (error) {
-      alert("An error occurred while deleting the product.");
+      setDeleteError("An error occurred while deleting the product.");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -160,7 +182,7 @@ export default function AdminProductsPage() {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleOpenDelete(product)}
                       className="rounded bg-red-50 px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-100"
                     >
                       Delete
@@ -205,6 +227,14 @@ export default function AdminProductsPage() {
         onClose={() => setIsModalOpen(false)}
         onSuccess={() => fetchProducts(currentPage)}
         productToEdit={selectedProduct}
+      />
+      <DeleteConfirmModal
+        isOpen={productToDelete !== null}
+        productName={productToDelete?.name}
+        loading={deleting}
+        error={deleteError}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCloseDelete}
       />
     </div>
   );

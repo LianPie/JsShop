@@ -84,7 +84,7 @@
             "stockChecking": "Stock checking",
             "processing": "Processing",
             "delivered": "Delivered",
-            "canceled": "Canceled"
+            "canceled": "Canceled"  
         }
     },
     "login": {
