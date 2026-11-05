@@ -1,51 +1,74 @@
 # Shop
 
-A full-stack e-commerce application for managing products, customers, and orders.
+A full-stack e-commerce application built with Next.js, allowing customers to browse products, manage their cart, and submit orders, with an admin dashboard for managing the shop.
 
 ## Overview
 
-This project is a web-based shop where customers can browse products, add items to a cart, and place orders.
+Shop is a web-based e-commerce application designed to explore essential online shopping workflows, from product browsing and order submission to administrative product and order management.
 
-An admin dashboard will allow managing products, users, and orders, as well as tracking completed sales.
+The application includes a customer-facing storefront and a separate admin dashboard. Administrators can manage products, configure shop settings, review orders, and track sales.
 
-## Planned Features
+## Features
 
 ### Customer
 
-* User registration and login
-* Browse products
-* View product details
-* Add products to cart
-* Submit orders
-* View order status
+- User registration and authentication
+- Browse products and view product details
+- Add and manage items in the shopping cart
+- Submit orders
+- Manage profile and delivery address
+- View order history and status
 
 ### Admin
 
-* Product management
-* User management
-* Order management
-* View order details
-* Track revenue
-* Mark orders as completed
+- Admin authentication
+- Product management (CRUD)
+- Shop settings management
+- Order management
+- View order details
+- Track order totals and sales
+- Update order status after customer confirmation
+
+## Screenshots
+
+### home
+![Canopy Dashboard](Screenshots/home.png)
+
+### login
+![Canopy Dashboard](Screenshots/login.png)
+
+### cart
+![Canopy Dashboard](Screenshots/orders.png)
+
+### profile
+![Canopy Dashboard](Screenshots/profile.png)
+
+### admin panel
+![Canopy Dashboard](Screenshots/admin.png)
 
 ## Tech Stack
 
 ### Frontend
 
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
 
 ### Backend
 
-* Next.js (Route Handlers / API routes)
+- Next.js App Router
+- [Add the actual backend/API implementation]
 
 ### Database
 
-* PostgreSQL
-* Prisma (ORM)
+- [Add the actual database]
+- [Add the ORM, if applicable]
 
-## Project Status
+## Project Structure
 
-🚧 In development
+The application separates the customer-facing storefront from the administrative dashboard, providing distinct workflows for customers and administrators.
+
+## Status
+
+The core shop functionality has been implemented. The project is being prepared for documentation and portfolio presentation.
