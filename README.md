@@ -58,12 +58,12 @@ The application includes a customer-facing storefront and a separate admin dashb
 ### Backend
 
 - Next.js App Router
-- [Add the actual backend/API implementation]
+- Next.js Route Handlers (API endpoints)
 
 ### Database
 
-- [Add the actual database]
-- [Add the ORM, if applicable]
+- PostgreSQL
+- Prisma ORM
 
 ## Project Structure
 
@@ -71,4 +71,4 @@ The application separates the customer-facing storefront from the administrative
 
 ## Status
 
-The core shop functionality has been implemented. The project is being prepared for documentation and portfolio presentation.
+Core functionality is complete.
